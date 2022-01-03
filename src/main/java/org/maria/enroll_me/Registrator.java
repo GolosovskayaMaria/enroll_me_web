@@ -13,6 +13,7 @@ public class Registrator extends HttpServlet {
     @Override protected void doGet(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)
             throws ServletException, IOException {
         httpServletRequest.setAttribute("name", "Devcolibri");
+        // TODO здесь мы разберем url и подготовим выбор даты
         httpServletRequest.getRequestDispatcher("datepicker.jsp").forward(httpServletRequest, httpServletResponse);
     }
 }

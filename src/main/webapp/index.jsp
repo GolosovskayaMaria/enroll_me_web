@@ -2,8 +2,8 @@
 <html>
     <body>
         <h2>
-            Enroll Me
+            Enroll Me debug page
         </h2>
-        <a href="enroll">Click here to see servlet</a>
+        <a href="enroll">Click here to to run enroll</a>
     </body>
 </html>
