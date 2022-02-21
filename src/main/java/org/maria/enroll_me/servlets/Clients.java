@@ -2,7 +2,8 @@ package org.maria.enroll_me.servlets;
 
 import com.google.gson.Gson;
 import org.maria.enroll_me.ClientRow;
-import org.maria.enroll_me.db.ClientsManager;
+import org.maria.enroll_me.db.ClientsTable;
+import org.maria.enroll_me.db.MeetingsTable;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,7 +37,7 @@ public class Clients extends HttpServlet {
                     String social = httpServletRequest.getParameter("social");
                     String location = httpServletRequest.getParameter("location");
                     ClientRow newClient = new ClientRow(0, appId, name, phone, social, location);
-                    ClientRow record = ClientsManager.insert(newClient);
+                    ClientRow record = ClientsTable.insert(newClient);
                     String jsonBody = this.gson.toJson(record);
                     PrintWriter out = httpServletResponse.getWriter();
                     httpServletResponse.setContentType("application/json");
@@ -50,8 +51,24 @@ public class Clients extends HttpServlet {
             case "/get_clients":
                 try {
                     String appId = httpServletRequest.getParameter("app_id");
-                    LinkedList<ClientRow> clients = ClientsManager.select(appId);
+                    LinkedList<ClientRow> clients = ClientsTable.select(appId);
                     String jsonBody = this.gson.toJson(clients);
+                    PrintWriter out = httpServletResponse.getWriter();
+                    httpServletResponse.setContentType("application/json");
+                    httpServletResponse.setCharacterEncoding("UTF-8");
+                    out.print(jsonBody);
+                    out.flush();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                return;
+            case "/invite":
+                try {
+                    String appId = httpServletRequest.getParameter("app_id");
+                    String userIdStr = httpServletRequest.getParameter("user_id");
+                    int userId = Integer.parseInt(userIdStr);
+                    String MeetingGUID = MeetingsTable.createInvite(appId, userId);
+                    String jsonBody = this.gson.toJson(MeetingGUID);
                     PrintWriter out = httpServletResponse.getWriter();
                     httpServletResponse.setContentType("application/json");
                     httpServletResponse.setCharacterEncoding("UTF-8");

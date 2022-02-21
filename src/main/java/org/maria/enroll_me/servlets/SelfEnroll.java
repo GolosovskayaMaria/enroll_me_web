@@ -1,21 +1,19 @@
 package org.maria.enroll_me.servlets;
 
-import org.maria.enroll_me.ClientRow;
-import org.maria.enroll_me.db.ClientsManager;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.logging.Logger;
 
 @WebServlet("/enroll") // @WebServlet(name = "ShowHeaders", urlPatterns = {"/ShowHeaders"})
 public class SelfEnroll extends HttpServlet {
     @Override protected void doGet(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)
             throws ServletException, IOException {
+
+        String invite = httpServletRequest.getParameter("invite");
+
         httpServletRequest.setAttribute("name", "Devcolibri");
         // TODO здесь мы разберем url и подготовим выбор даты
 

@@ -8,8 +8,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
+import java.util.logging.Logger;
 
-public class ClientsManager {
+public class ClientsTable {
+
     public static ClientRow insert(ClientRow row) throws SQLException
     {
         try(Connection conn = DataBaseManager.getConnection()) {
@@ -27,7 +29,7 @@ public class ClientsManager {
                 row.setId(id);
                 return row;
             }
-            throw new SQLException("cant insert");
+            throw new SQLException("cant insert ClientRow");
         }
     }
 
@@ -52,4 +54,6 @@ public class ClientsManager {
             return  clients;
         }
     }
+
 }
+
