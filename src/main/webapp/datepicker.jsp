@@ -20,21 +20,20 @@
     <body>
         <h1>Hello ${name}</h1>
         <Pre>
-            <form action="DatePicker">
+            <form action="date_picker" method="POST">
+                <input hidden value=${client_id}  type="text" name="client_id"/>
+                <input hidden value=${app_id}  type="text" name="app_id"/>
+                <input hidden value=${invite_id}  type="text" name="invite_id"/>
                 <label for="datepicker">Выберите день и время для записи:</label>
-                    <input type="text" name="dob" id="datepicker">
+                <input type="text" name="dob" id="datepicker">
                 <label for="from">Время:</label>
-                    <select name="time" id="time">
-                        <option value="1">10:00</option>
-                        <option value="2">11:00</option>
-                        <option value="3">12:00</option>
-                        <option value="4">13:00</option>
-                        <option value="5">14:00</option>
-                        <option value="6">15:00</option>
-                        <option value="7">16:00</option>
-                        <option value="8">17:00</option>
-                        <option value="9">18:00</option>
-                  </select>
+                <select name="time" id="time">
+                    <option value="10:00:00">10:00</option>
+                    <option value="11:00:00">11:00</option>
+                    <option value="12:00:00">12:00</option>
+                    <option value="13:00:00">13:00</option>
+                    <option value="14:00:00">14:00</option>
+              </select>
                 <input type="submit" value="Submit">
             </form>
         </pre>

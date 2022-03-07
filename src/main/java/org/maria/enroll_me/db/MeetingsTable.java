@@ -31,6 +31,19 @@ public class MeetingsTable {
         }
     }
 
+    public static void updateInvite(int invite_id, java.util.Date utilDate)  throws SQLException
+    {
+        try(Connection conn = DataBaseManager.getConnection()) {
+
+            String sql = "UPDATE meetings set MeetupDate=? WHERE id = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setDate(1, new java.sql.Date(utilDate.getTime()));
+            ps.setInt(2, invite_id);
+            ps.executeUpdate();
+            Logger.getLogger(DataBaseManager.class.getName()).info("success invite update" + String.valueOf(invite_id));
+        }
+    }
+
     public static Meeting select(String inviteId) throws SQLException
     {
         try(Connection conn = DataBaseManager.getConnection()) {

@@ -25,7 +25,7 @@ Response:
 Возвращает ошибку или спискок всех клиентов как json 
 Пример:      
 Request:  
-http://192.168.1.41:8888/api/clients/get_clients?app_id=1  
+http://localhost:8888/api/clients/get_clients?app_id=1  
 Response:  
 {"id":6,"app_id":"1","name":"Maria","phone":"12345","socilaMedia":"whatsup","location":"Gatchina"}  
 
@@ -37,13 +37,22 @@ Response:
 В записи будут данные клиента и время создания приглашения. 
 Клиенту останется только проставить дату и коментарий.  
 Команда вернет id приглашения.  
-http://192.168.1.41:8888/api/clients/invite?app_id=1&user_id=2
-
+http://localhost:8888/api/clients/invite?app_id=1&user_id=2
+Response:    
+"3"  
 
 #### /enroll - записать себя на визит к мастеру
 Параметры
 1. invite - (guid) id приглашения на запись, ее генерирует клиентское пришашение запросом /invite  
-http://localhost:8888/enroll?invite=2
+http://localhost:8888/enroll?invite=3  
+Update DB:  
+mysql> select * from meetings;  
++----+---------------+--------+---------------------+---------------------+  
+| ID | ApplicationId | UserId | MeetupDate          | CreateDate          |  
++----+---------------+--------+---------------------+---------------------+  
+|  1 | 1             |      2 | NULL                | 2022-02-21 16:30:34 |  
+|  2 | 1             |      2 | 2022-03-15 00:00:00 | 2022-02-21 16:31:46 |  
+  
 
 
 ### Use cases

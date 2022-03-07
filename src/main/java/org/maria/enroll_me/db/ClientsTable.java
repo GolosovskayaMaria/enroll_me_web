@@ -1,5 +1,6 @@
 package org.maria.enroll_me.db;
 
+import com.mysql.cj.xdevapi.Client;
 import org.maria.enroll_me.ClientRow;
 import org.maria.enroll_me.db.DataBaseManager;
 
@@ -55,5 +56,27 @@ public class ClientsTable {
         }
     }
 
+    public static ClientRow get(int clientId) throws SQLException
+    {
+        try(Connection conn = DataBaseManager.getConnection()) {
+            String sql = "SELECT * FROM clients WHERE ID=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, clientId);
+            ResultSet results = ps.executeQuery();
+            if(results.next()) {
+                ClientRow row = new ClientRow(
+                        results.getInt("ID"),
+                        results.getString("ApplicationId"),
+                        results.getString("Name"),
+                        results.getString("Phone"),
+                        results.getString("SocialMedia"),
+                        results.getString("Location"));
+                return row;
+            } else
+            {
+                throw new SQLException("client not found");
+            }
+        }
+    }
 }
 
