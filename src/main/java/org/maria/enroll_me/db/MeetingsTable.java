@@ -62,5 +62,26 @@ public class MeetingsTable {
             throw new SQLException("meeting not found");
         }
     }
+
+    public static LinkedList<Meeting> selectAll(String appId) throws SQLException
+    {
+        try(Connection conn = DataBaseManager.getConnection()) {
+            String sql = "SELECT * FROM meetings WHERE ApplicationId=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, appId);
+            ResultSet results = ps.executeQuery();
+            LinkedList<Meeting> meetings = new LinkedList<>();
+            while(results.next()) {
+                meetings.add(new Meeting(
+                        results.getInt("ID"),
+                        results.getString("ApplicationId"),
+                        results.getInt("UserId"),
+                        results.getDate("MeetupDate"),
+                        results.getDate("CreateDate")));
+            }
+            return meetings;
+        }
+    }
+
 }
 

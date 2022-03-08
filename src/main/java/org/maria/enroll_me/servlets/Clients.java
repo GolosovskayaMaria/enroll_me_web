@@ -1,6 +1,7 @@
 package org.maria.enroll_me.servlets;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.maria.enroll_me.ClientRow;
 import org.maria.enroll_me.db.ClientsTable;
 import org.maria.enroll_me.db.MeetingsTable;
@@ -20,7 +21,7 @@ import java.util.logging.Logger;
 // /api/clients/get - return json all clients list
 public class Clients extends HttpServlet {
 
-    private Gson gson = new Gson();
+    private Gson gson = new GsonBuilder().setDateFormat("MM/dd/yyyy HH:mm:ss").create();
 
     @Override protected void doGet(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)
             throws ServletException, IOException {
