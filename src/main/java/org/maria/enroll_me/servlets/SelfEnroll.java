@@ -43,7 +43,7 @@ public class SelfEnroll extends HttpServlet {
                     httpServletRequest.setAttribute("invite_id", inviteId);
                     httpServletRequest.setAttribute("app_id", client.getApp_id());
                     Logger.getLogger(this.getClass().getName()).info("Invite " + inviteId + " Client " + client.getName());
-                    httpServletRequest.getRequestDispatcher("datepicker.jsp").forward(httpServletRequest, httpServletResponse);
+                    httpServletRequest.getRequestDispatcher("/datepicker.jsp").forward(httpServletRequest, httpServletResponse);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }

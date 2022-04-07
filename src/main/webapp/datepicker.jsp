@@ -11,7 +11,7 @@
         <script>
             $(function () {
                 $("#datepicker").datepicker({
-                    maxDate: "+2w"
+                    maxDate: "+1w"
                 });
             });
         </script>

@@ -16,6 +16,9 @@ import java.util.Date;
 import java.util.logging.Logger;
 
 
+// https://www.codejava.net/java-ee/jsp/how-to-create-dynamic-drop-down-list-in-jsp-from-database
+
+
 @WebServlet("/date_picker")
 public class DatePickerResult extends HttpServlet {
 
@@ -42,6 +45,8 @@ public class DatePickerResult extends HttpServlet {
 
         Logger.getLogger(this.getClass().getName()).info("Date " + strDate + " Time " + time + " ClienId " + client_id + " AppId " + app_id);
 
+        // PUSH https://github.com/pusher/push-notifications-server-java
+        
         try {
             writer.println("<p>Date: " + date + "</p>");
             writer.println("<p>Time: " + time + "</p>");
