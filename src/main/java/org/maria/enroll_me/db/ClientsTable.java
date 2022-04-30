@@ -4,6 +4,8 @@ import com.mysql.cj.xdevapi.Client;
 import org.maria.enroll_me.ClientRow;
 import org.maria.enroll_me.db.DataBaseManager;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,7 +21,8 @@ public class ClientsTable {
             String sql = "INSERT INTO clients (ApplicationId, Name, Phone, SocialMedia, Location) VALUES(?,?,?,?,?)";
             PreparedStatement ps = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, row.getApp_id());
-            ps.setString(2, row.getName());
+            ps.setBytes(2, row.getName().getBytes(StandardCharsets.UTF_8));
+         //   ps.setString(2, row.getName());
             ps.setString(3, row.getPhone());
             ps.setString(4, row.getSocilaMedia());
             ps.setString(5, row.getLocation());
@@ -34,8 +37,7 @@ public class ClientsTable {
         }
     }
 
-    public static LinkedList<ClientRow> select(String appId) throws SQLException
-    {
+    public static LinkedList<ClientRow> select(String appId) throws SQLException, UnsupportedEncodingException {
         try(Connection conn = DataBaseManager.getConnection()) {
             String sql = "SELECT * FROM clients WHERE ApplicationId=?";
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -46,7 +48,7 @@ public class ClientsTable {
                 ClientRow row = new ClientRow(
                         results.getInt("ID"),
                         results.getString("ApplicationId"),
-                        results.getString("Name"),
+                       results.getString("Name"),
                         results.getString("Phone"),
                         results.getString("SocialMedia"),
                         results.getString("Location"));
@@ -55,7 +57,13 @@ public class ClientsTable {
             return  clients;
         }
     }
-
+    public static void del_clients(int clientId) throws SQLException{
+        try(Connection conn = DataBaseManager.getConnection()) {
+            String sql = "DELETE FROM clients WHERE ID=" + clientId ;
+            PreparedStatement ps = conn.prepareStatement(sql);
+                    ps.execute();
+        }
+    }
     public static ClientRow get(int clientId) throws SQLException
     {
         try(Connection conn = DataBaseManager.getConnection()) {

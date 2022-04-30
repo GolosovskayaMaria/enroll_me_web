@@ -13,6 +13,6 @@ public class Meeting {
     int id;
     String applicationId;
     int userId;
-    Date meetupDate;
+    String meetupDate;
     Date createDate;
 }
