@@ -3,6 +3,9 @@ package org.maria.enroll_me.servlets;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import lombok.SneakyThrows;
+import org.maria.enroll_me.ClientRow;
+import org.maria.enroll_me.Meeting;
+import org.maria.enroll_me.db.ClientsTable;
 import org.maria.enroll_me.db.MeetingsTable;
 import org.maria.enroll_me.push.Push_Admin;
 import org.maria.enroll_me.push.Push_connect;
@@ -70,7 +73,7 @@ System.out.println(time);
 
         String client_id = request.getParameter("client_id");
         String app_id = request.getParameter("app_id");
-      int invite_id = Integer.parseInt(request.getParameter("invite_id"));
+        int invite_id = Integer.parseInt(request.getParameter("invite_id"));
 
         MeetingsTable.updateInvite(invite_id, date);
 
@@ -79,9 +82,17 @@ System.out.println(time);
         // PUSH https://github.com/pusher/push-notifications-server-java
         Gson gson = new GsonBuilder().create();
         Send send= new Send();
+
+        Meeting meeting = MeetingsTable.select(Integer.toString(invite_id));
+        Logger.getLogger(this.getClass().getName()).info("meeting " + meeting);
+        int userId = meeting.getUserId();
+        ClientRow client = ClientsTable.get(userId);
+        String clientName = client.getName();
+        Logger.getLogger(this.getClass().getName()).info("clientName " + clientName);
+
         send.to="/topics/my_little_topic";
         send.notification.body = strDate;
-        send.notification.title = request.getParameter("user_name");;
+        send.notification.title = clientName;
         send.notification.icon = "ic_launcher";
         send.data.ip = "http://" + Push_connect.getIpAddress()+":8888";
         send.data.name = app_id;

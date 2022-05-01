@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 public class DataBaseManager {
     public static java.sql.Connection getConnection() throws SQLException
     {
-        java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/enroll_me", "root", "root");
+        java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/enroll_me", "root", "MashenkA34714");
         Logger.getLogger(DataBaseManager.class.getName()).info("connection success");
         return connection;
     }

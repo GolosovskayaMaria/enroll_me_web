@@ -1,13 +1,10 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java"
-
-%>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
 
 <% String ss1=(String)application.getAttribute("name"); %>
-<html lang="en">
+<html>
     <head>
         <meta charset="UTF-8">
         <title>Java Date Picker</title>
-        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
