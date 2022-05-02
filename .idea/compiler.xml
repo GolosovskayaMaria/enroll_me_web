@@ -8,7 +8,6 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="EnrollMeWeb" />
-        <module name="enroll_me_web" />
       </profile>
     </annotationProcessing>
   </component>
