@@ -37,17 +37,17 @@ return "<%=stu%>";
     </head>
 
     <body>
-        <h1>Hello  <%
+        <h0 style="font-size:300%;">Hello  <%
                    String ss =(String)request.getAttribute( "name");
                    out.print(ss);
-                   %> </h1>
+                   %> </h0>
         <Pre>
             <form action="date_picker" method="POST">
                 <input hidden  id="client_id"  type="text" name="client_id"/>
                 <input hidden   type="text" name="app_id" id="app_id"/>
                 <input hidden  type="text" name="invite_id" id="invite_id"  />
                 <input hidden  type="text" name="user_name" id="user_name"  />
-                <label for="datepicker">Выберите день и время для записи:</label>
+                <label for="datepicker" style="font-size:300%;">Пожалуйста выберите день и время для записи:</label>
                 <input type="text" name="dob" id="datepicker">
                 <label for="from">Время:</label>
                 <select name="time" id="time">

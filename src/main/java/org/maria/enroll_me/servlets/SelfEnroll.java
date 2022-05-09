@@ -65,7 +65,7 @@ if(dats[0].startsWith(data)){
             throws ServletException, IOException {
 
         String path = httpServletRequest.getPathInfo();
-        Logger.getLogger(this.getClass().getName()).info(path);
+        Logger.getLogger(this.getClass().getName()).info("path: " + path);
 
         switch(path) {
             case "/invite_self":
@@ -106,7 +106,7 @@ if(dats[0].startsWith(data)){
                  httpServletResponse.setCharacterEncoding("UTF-8");
                  String[] sp = meeting.getMeetupDate().split(" ");
 
-                 String s = "<html><body><H2>По этой ссылке была проведена запись.</H2> " +
+                 String s = "<html><body><H1>По этой ссылке была проведена запись.</H1> " +
                          "<p>" + client.getName() + "</p>" +
                          "<p>Date: " + sp[0] + "</p>" +
                          "<p>Time: " + sp[1] + "</p>" +
@@ -154,6 +154,7 @@ if(dats[0].startsWith(data)){
                 return;
             case "/schedule":
                 try {
+                    Logger.getLogger(this.getClass().getName()).info("query: " + httpServletRequest.getQueryString());
                     String appId = httpServletRequest.getParameter("app_id");
                     LinkedList<Meeting> meetings = MeetingsTable.selectAll(appId);
                     System.out.println(meetings);

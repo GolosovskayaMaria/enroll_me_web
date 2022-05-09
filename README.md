@@ -65,7 +65,7 @@ mysql> select * from meetings;
 #### /enroll/schedule - получить все свои записи (- 1 день и вперед)
 1. app_id - id установленной на телефон программы (мастера?)
 Сервер по этой команде прочитает из базы данных все запси на прием и вернет их как json  
-http://localhost:8888/api/enroll/schedule?app_id=1
+http://localhost:8888/api/enroll/schedule?app_id=6147a7c5-0baf-303b-80ba-3169c66843ff
 Response:  
 ```   
 [
