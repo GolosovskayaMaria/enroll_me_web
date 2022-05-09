@@ -197,7 +197,7 @@ if(dats[0].startsWith(data)){
                 "<input hidden  value=\""+client.getApp_id()+"\" name=\"app_id\" id=\"app_id\"/>\n" +
                 "<input hidden  value=\""+inviteId+"\" name=\"invite_id\" id=\"invite_id\"  />\n" +
                 "<input hidden  value=\""+client.getName()+"\" name=\"user_name\" id=\"user_name\"  />\n" +
-                "<label for=\"datepicker\">Выберите время для записи:</label>\n<br><br>" +
+                "<label style=\"color:red;font-size:40px; for=\"datepicker\">Пож Выберите время для записи:</label>\n<br><br>" +
                 "<label for=\"datepicker\">"+ data.split(" ")[0]+"</label>\n<br><br>" +
               //  "<input type=\"text\" name=\"dob\" id=\"datepicker\">\n<br><br>" +
                 "<label for=\"from\">Время:</label>\n<br><br>" +
