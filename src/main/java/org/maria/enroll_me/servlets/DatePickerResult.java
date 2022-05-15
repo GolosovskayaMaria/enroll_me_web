@@ -107,7 +107,8 @@ public class DatePickerResult extends HttpServlet {
         try {
             SimpleDateFormat formatter = new SimpleDateFormat("EEE, d MMM yyyy HH:mm");
             String formattedDate = formatter.format(date);
-            writer.println("<p>Спасибо за запись. Вы записались на " + formattedDate + "</p>");
+            writer.println("<p><label style=\"color:black;font-size:30px; for=\"from\">Спасибо за запись. Вы записались на " + formattedDate + "</p>");
+
         } finally {
             writer.close();
         }

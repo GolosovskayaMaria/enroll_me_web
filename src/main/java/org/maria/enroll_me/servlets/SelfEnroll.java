@@ -108,10 +108,9 @@ public class SelfEnroll extends HttpServlet {
                         httpServletResponse.setCharacterEncoding("UTF-8");
                         String[] sp = meeting.getMeetupDate().split(" ");
 
-                        String s = "<html><body><H1>Вы записанны на </H1> " +
-                                "<p>" + client.getName() + "</p>" +
-                                "<p>Date: " + sp[0] + "</p>" +
-                                "<p>Time: " + sp[1] + "</p>" +
+                        String s = "<html><body><H1>" + "Вы записаны на </H1> " +
+                                "<p><label style=\"color:black;font-size:30px; for=\"datepicker\">" + sp[0] +  " в " + sp[1] + "</p>" +
+
                                 //    "<H3>Попросите у мастера другую ссылку.</H3>" +
                                 "</body></html>";
                         out.write(s.getBytes("UTF-8"));
@@ -204,8 +203,8 @@ public class SelfEnroll extends HttpServlet {
                 "<input hidden value=\"" + client.getApp_id() + "\" name=\"app_id\" id=\"app_id\"/>\n" +
                 "<input hidden value=\"" + inviteId + "\" name=\"invite_id\" id=\"invite_id\"  />\n" +
                 "<input hidden value=\"" + client.getName() + "\" name=\"user_name\" id=\"user_name\"  />\n" +
-                "<label style=\"color:black;font-size:25px; for=\"datepicker\">Выберете удобное для Вас время для записи " + formattedDate + "</label>\n<br><br>" +
-                "<label style=\"color:black;font-size:25px; for=\"from\">Время:</label>\n<br><br>" +
+                "<label style=\"color:black;font-size:30px; for=\"datepicker\">Выберете удобное для Вас время записи на " + formattedDate + "</label>\n<br><br>" +
+                "<label style=\"color:black;font-size:30px; for=\"from\">Время:</label>\n<br><br>" +
                 "<select name=\"time\" id=\"time\">\n";
         String body = "";
         String[] split = times.split("/");
