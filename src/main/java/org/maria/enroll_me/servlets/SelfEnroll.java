@@ -191,16 +191,16 @@ if(dats[0].startsWith(data)){
        String data = meeting.getMeetupDate();
       //  DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy  HH:mm:ss");
 
-        String start ="<html><body><h1>Hello " + client.getName() +"</h1><br>\n" +
+        String start ="<html><h1>Здравствуйте, " + client.getName() +"</h1><br>\n" +
+
                 "<form action=\"date_picker\" method=\"POST\">\n" +
-                "<input hidden  value=\"" + client.getId() + "\"  type=\"text\" name=\"client_id\"/>\n" +
-                "<input hidden  value=\""+client.getApp_id()+"\" name=\"app_id\" id=\"app_id\"/>\n" +
-                "<input hidden  value=\""+inviteId+"\" name=\"invite_id\" id=\"invite_id\"  />\n" +
-                "<input hidden  value=\""+client.getName()+"\" name=\"user_name\" id=\"user_name\"  />\n" +
-                "<label style=\"color:red;font-size:40px; for=\"datepicker\">Пож Выберите время для записи:</label>\n<br><br>" +
-                "<label for=\"datepicker\">"+ data.split(" ")[0]+"</label>\n<br><br>" +
+                "<input hidden value=\"" + client.getId() + "\"  type=\"text\" name=\"client_id\"/>\n" +
+                "<input hidden value=\""+client.getApp_id()+"\" name=\"app_id\" id=\"app_id\"/>\n" +
+                "<input hidden value=\""+inviteId+"\" name=\"invite_id\" id=\"invite_id\"  />\n" +
+                "<input hidden value=\""+client.getName()+"\" name=\"user_name\" id=\"user_name\"  />\n" +
+                "<label style=\"color:black;font-size:25px; for=\"datepicker\">Выберете удобное для Вас время для записи " + data.split(" ")[0]+"</label>\n<br><br>" +
               //  "<input type=\"text\" name=\"dob\" id=\"datepicker\">\n<br><br>" +
-                "<label for=\"from\">Время:</label>\n<br><br>" +
+                "<label style=\"color:black;font-size:25px; for=\"from\">Время:</label>\n<br><br>" +
                 "<select name=\"time\" id=\"time\">\n";
         String body = "";
         String[] split = times.split("/");
@@ -210,7 +210,7 @@ for( String s : split ){
     body += "<option value=\""+data.split("  ")[0]+" "+s.trim()+"\">" +s.substring(0 , 2) +"</option>\n";
 }
         String end = "</select>\n<br><br>" +
-                "<input type=\"submit\" value=\"Submit\">\n" +
+                "<input type=\"submit\" value=\"Записаться\">\n" +
                 "</form>\n" +
                 "</body>\n" +
                 "</html>";
