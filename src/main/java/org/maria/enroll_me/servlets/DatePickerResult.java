@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -34,21 +35,21 @@ public class DatePickerResult extends HttpServlet {
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse httpServletResponse) throws ServletException, IOException {
         super.doPut(request, httpServletResponse);
-     //   String client_id = request.getParameter("client_id");
-     //   String app_id = request.getParameter("app_id");
+        //   String client_id = request.getParameter("client_id");
+        //   String app_id = request.getParameter("app_id");
         int invite_id = Integer.parseInt(request.getParameter("invite_id"));
         String time = request.getParameter("time");
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-System.out.println(time);
+        System.out.println(time);
         try {
-            Date   date = dateFormat.parse(time);
+            Date date = dateFormat.parse(time);
             MeetingsTable.updateInvite(invite_id, date);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
 
-        Logger.getLogger(this.getClass().getName()).info("Date " + time + " Time " + time  );
+        Logger.getLogger(this.getClass().getName()).info("Date " + time + " Time " + time);
 
     }
 
@@ -57,19 +58,21 @@ System.out.println(time);
             throws ServletException, IOException {
 
         response.setContentType("text/html");
+        response.setCharacterEncoding("UTF-8");
         PrintWriter writer = response.getWriter();
 
         String strDate;// = request.getParameter("dob");
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String time = request.getParameter("time");
-        System.out.println(request.getParameter("invite_id") +" " + request.getParameter("app_id") +" " + " Time " + time );
+        System.out.println(request.getParameter("invite_id") + " " + request.getParameter("app_id") + " " + " Time " + time);
         String[] sp = time.split(" ");
-        if(sp.length == 3)
-       strDate = sp[0] +" " + sp[2];
-        else strDate = sp[0] +" " + sp[1];
-        System.out.println( strDate  +"               " + time);
-       Date date = dateFormat.parse(strDate);
+        if (sp.length == 3)
+            strDate = sp[0] + " " + sp[2];
+        else
+            strDate = sp[0] + " " + sp[1];
+        System.out.println(strDate + "               " + time);
+        Date date = dateFormat.parse(strDate);
 
         String client_id = request.getParameter("client_id");
         String app_id = request.getParameter("app_id");
@@ -77,11 +80,11 @@ System.out.println(time);
 
         MeetingsTable.updateInvite(invite_id, date);
 
-        Logger.getLogger(this.getClass().getName()).info("Date " + strDate + " Time " + time + " ClienId " + client_id + " AppId " + app_id);
+        Logger.getLogger(this.getClass().getName()).info("Meeting created - Date " + strDate + " Time " + time + " ClienId " + client_id + " AppId " + app_id);
 
         // PUSH https://github.com/pusher/push-notifications-server-java
         Gson gson = new GsonBuilder().create();
-        Send send= new Send();
+        Send send = new Send();
 
         Meeting meeting = MeetingsTable.select(Integer.toString(invite_id));
         Logger.getLogger(this.getClass().getName()).info("meeting " + meeting);
@@ -90,20 +93,21 @@ System.out.println(time);
         String clientName = client.getName();
         Logger.getLogger(this.getClass().getName()).info("clientName " + clientName);
 
-        send.to="/topics/my_little_topic";
+        send.to = "/topics/my_little_topic";
         send.notification.body = strDate;
         send.notification.title = clientName;
         send.notification.icon = "ic_launcher";
-        send.data.ip = "http://" + Push_connect.getIpAddress()+":8888";
+        send.data.ip = "http://" + Push_connect.getIpAddress() + ":8888";
         send.data.name = app_id;
         send.data.type = 2;
         send.data.meeting = invite_id;
 
         String jsonBody = gson.toJson(send);
-        Push_Admin.sendPush(jsonBody );
+        Push_Admin.sendPush(jsonBody);
         try {
-            writer.println("<p>Date: " + strDate + "</p>");
-            writer.println("<p>Time: " + time + "</p>");
+            SimpleDateFormat formatter = new SimpleDateFormat("EEE, d MMM yyyy HH:mm");
+            String formattedDate = formatter.format(date);
+            writer.println("<p>Спасибо за запись. Вы записались на " + formattedDate + "</p>");
         } finally {
             writer.close();
         }
